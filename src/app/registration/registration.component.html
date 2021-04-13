@@ -1,0 +1,39 @@
+<div class="main">
+<form [formGroup]="myform" (ngSubmit)="valueSend()">
+    Firstname :<input type="text" placeholder="Enter your  firstname" formControlName="firstname"> <br>
+    Lastname : <input type="text"   placeholder="Enter your  lastname" formControlName="lastname"> <br>
+    Phone  : <input type="text"  placeholder="Enter your phone" formControlName="phone"> <br>
+    Address  :<input type="text" placeholder="Enter your address" formControlName="address"> <br>
+    <button (click)="DetailsValuefetch()" type="button" >Generate address</button>
+    
+    <div formArrayName="DetailsArray" *ngFor="let b of Details; let i=index">
+    
+        <div [formGroupName]="i">
+           Streetnumber : <input type="text" placeholder="Enter your street number" formControlName="streetnumber">
+          
+           Streetname: <input type="text" placeholder="Enter your street name" formControlName="streetname">
+           Pincode: <input type="text" placeholder="Enter your pincode" formControlName="pincode">
+           Landmark : <input type="text" placeholder="Enter your landmark" formControlName="landmark">
+           <button (click)="dlt(i)">Delete</button>
+        </div>
+        
+        </div>     
+        Statename :<select formControlname="statename">
+            <div *ngFor="let a  of stateArrayobj">
+            <option value="{{a}}"> {{a}} </option>
+        </div>
+        </select> <br>
+
+     
+        email: <input type="text" placeholder="Enter your email" formControlName="email"> <br>
+        <div style="color:red;" *ngIf="myform.get('email').hasError('pattern') && myform.get('email').touched ">
+            email not valid.
+          </div> 
+        password: <input type="password" placeholder="Enter your password" formControlName="password"> <br>
+        <div  style="color:red;" *ngIf="myform.get('password').hasError('pattern') && myform.get('password').touched">
+            not valid password
+        </div>
+        confirmPassword :<input type="password" placeholder="Enter your confirm Password" formControlName="confirmPassword"> <br>
+        <input type="submit" class="btn btn-warning ">
+</form>
+</div>
